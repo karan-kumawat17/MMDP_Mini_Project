@@ -10,6 +10,11 @@ This project focuses on collecting and analyzing datasets across multiple modali
 - Sourced images from **Google Images** and other image repositories.
 - Stored and organized images for analysis.
 
+Here are some sample images from our dataset
+![Sample Image 1](DiverseVisuals/Abstract_Paintings/Abstract_Paintings_1.jpg)
+
+![Sample Image 2](DiverseVisuals/Street_Art_Murals/Street_Art_Murals1.jpg)
+
 ### **B. Text Dataset Collection**
 - Chose **20 different categories** and identified **three websites per category**.
 - Implemented a **web crawler** to extract relevant text data (e.g., article titles, content, publication date).
