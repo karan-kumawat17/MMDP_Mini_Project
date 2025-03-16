@@ -15,6 +15,9 @@ Here are some sample images from our dataset
 
 ![Sample Image 2](DiverseVisuals/Futuristic_Cities/Futuristic_Cities_1.jpg)
 
+I trained 3 models on image dataset only one is uploaded in github, rest you can find in:
+[Models](https://huggingface.co/karankumawat/resnet_DA323/tree/main)
+
 ### **B. Text Dataset Collection**
 - Chose **20 different categories** and identified **three websites per category**.
 - Implemented a **web crawler** to extract relevant text data (e.g., article titles, content, publication date).
