@@ -17,6 +17,7 @@ def setup_driver():
     service = Service(driver_path)  # Adjust the path to your ChromeDriver
     options = webdriver.ChromeOptions()
     # options.add_argument("--headless")  # Ensure headless is being added as an argument
+    options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36")
     options.add_argument("--disable-gpu")  # This option is often recommended to run headless
     options.add_argument("--window-size=1920,1080")  # Specify the window size
     options.add_argument("--no-sandbox")  # Bypass OS security model
@@ -59,7 +60,7 @@ def search_images(driver, query, num_images=50):
 
             
         driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(3)
+        time.sleep(4)
         new_height = driver.execute_script("return document.body.scrollHeight")
         if new_height == last_height:
             break
@@ -80,14 +81,20 @@ def download_images(image_urls, category):
     folder_path = os.path.join("DiverseVisuals", category.replace(" ", "_"))
     metadata = []
 
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/110.0.0.0 Safari/537.36"
+    }
+
     for i, url in enumerate(image_urls):
         try:
-            response = requests.get(url, stream=True, timeout=10)
+            response = requests.get(url, stream=True, timeout=10, headers=headers)
             if response.status_code == 200:
                 filename = f"{category.replace(' ', '_')}_{i+1}.jpg"
                 file_path = os.path.join(folder_path, filename)
                 img = Image.open(BytesIO(response.content))
-                img.save(file_path, "PNG")
+                if img.mode in ("RGBA", "P"):
+                    img = img.convert("RGB")
+                img.save(file_path, "JPEG")
                 resolution = f"{img.width}x{img.height}"
                 metadata.append([category, filename, url, resolution])
         except Exception as e:
